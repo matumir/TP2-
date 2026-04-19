@@ -131,3 +131,58 @@
 .campo-contrasena__boton-ojo:hover {
   color: var(--texto);
 }
+
+.medidor-fortaleza {
+  margin-top: 14px;
+}
+.medidor-fortaleza__barras {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+.medidor-fortaleza__barra {
+  flex: 1;
+  height: 3px;
+  border-radius: 99px;
+  background: var(--superficie-secundaria);
+  border: 0.5px solid var(--borde);
+  overflow: hidden;
+  position: relative;
+}
+ 
+.medidor-fortaleza__relleno {
+  position: absolute;
+  inset: 0;
+  border-radius: 99px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+}
+.medidor-fortaleza__relleno--activo { transform: scaleX(1); }
+.medidor-fortaleza__relleno--debil  { background: var(--rojo); }
+.medidor-fortaleza__relleno--medio  { background: var(--ambar); }
+.medidor-fortaleza__relleno--fuerte { background: var(--verde); }
+ 
+.medidor-fortaleza__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.medidor-fortaleza__insignia {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 99px;
+}
+
+.medidor-fortaleza__insignia--vacio  { color: var(--texto-apagado); background: var(--superficie-secundaria); }
+.medidor-fortaleza__insignia--debil  { color: #f35c5c; background: rgba(243,92,92,0.12); }
+.medidor-fortaleza__insignia--medio  { color: #f3c15c; background: rgba(243,193,92,0.12); }
+.medidor-fortaleza__insignia--fuerte { color: #7af3b2; background: rgba(122,243,178,0.12); }
+.medidor-fortaleza__longitud {
+  font-family: var(--fuente-mono);
+  font-size: 11px;
+  color: var(--texto-apagado);
+}
