@@ -1,6 +1,6 @@
 import { useState } from "react"
 import MedidorFortaleza from "./MedidorFortaleza"
-
+import ListaRequisitos from "./ListaRequisitos"
 function calcularPuntaje(pw) {
   if (!pw) return 0
   let pts = 0
@@ -46,7 +46,10 @@ export default function FortalezaContrasena() {
             </div>
           <MedidorFortaleza puntaje={puntaje} longitud={contrasena.length} />
         </div>
-
+        <div className="tarjeta">
+          <p className="tarjeta__etiqueta">Checklist de requisitos</p>
+          <ListaRequisitos contrasena={contrasena} />
+        </div>
       </div>
     </div>
   )
