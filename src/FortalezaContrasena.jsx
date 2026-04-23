@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 import MedidorFortaleza from "./MedidorFortaleza"
 import ListaRequisitos from "./ListaRequisitos"
 function calcularPuntaje(pw) {
@@ -14,7 +14,18 @@ function calcularPuntaje(pw) {
 export default function FortalezaContrasena() {
   const [contrasena, setContrasena] = useState("")
   const [mostrarTexto, setMostrarTexto] = useState(false)
+  const [copiado, setCopiado] = useState(false)
+  const temporizadorCopia = useRef(null)
+
   const puntaje = calcularPuntaje(contrasena)
+
+  const manejarCopia = () => {
+    if (!contrasena) return
+    navigator.clipboard.writeText(contrasena).then(() => {
+      setCopiado(true)
+      temporizadorCopia.current = setTimeout(() => setCopiado(false), 3000)
+    })
+  }
   return (
     <div className="contenedor-app">
       <div className="aplicacion">
@@ -45,12 +56,24 @@ export default function FortalezaContrasena() {
             </button>
             </div>
           <MedidorFortaleza puntaje={puntaje} longitud={contrasena.length} />
-        </div>
+          <div className="fila-acciones">
+            <button
+              className={`boton ${copiado ? "boton--exito" : ""}`}
+              onClick={manejarCopia}
+              disabled={!contrasena}
+            >
+              {copiado ? "¡Copiado!" : "Copiar clave"}
+            </button>
+          </div>
+            <div className="mensaje-copiado" style={{ opacity: copiado ? 1 : 0 }}>
+            ¡Contraseña copiada al portapapeles!
+          </div>
         <div className="tarjeta">
           <p className="tarjeta__etiqueta">Checklist de requisitos</p>
           <ListaRequisitos contrasena={contrasena} />
         </div>
       </div>
-    </div>
+      </div>
+      </div>
   )
 }
