@@ -1,4 +1,13 @@
-export default function MedidorFortaleza({ puntaje, longitud }) {
+function calcularPuntaje(pw) {
+  if (!pw) return 0
+  let pts = 0
+  if (pw.length >= 8) pts++
+  if (/[A-Z]/.test(pw) && /[a-z]/.test(pw)) pts++
+  if (/[0-9]/.test(pw) && /[^A-Za-z0-9]/.test(pw)) pts++
+  if (pw.length >= 12) pts = Math.min(3, pts + 1)
+  return Math.min(3, Math.max(pts, pw.length >= 8 ? 1 : 0))
+}
+export default function MedidorFortaleza({contrasena}) {
 
   const obtenerClaseBarra = (indice) => {
     if (puntaje === 0) return "";
@@ -8,9 +17,11 @@ export default function MedidorFortaleza({ puntaje, longitud }) {
     return "";
   };
 
+
   const etiquetas      = ["", "Poco segura", "Segura", "Muy segura"];
   const clasesInsignia = ["vacio", "debil", "medio", "fuerte"];
-
+  const puntaje = calcularPuntaje(contrasena)
+  const longitud = contrasena.length
   return (
     <div className="medidor-fortaleza">
 
@@ -22,7 +33,6 @@ export default function MedidorFortaleza({ puntaje, longitud }) {
         ))}
       </div>
 
-      {/* Insignia de nivel + contador de caracteres */}
       <div className="medidor-fortaleza__info">
         <span className={`medidor-fortaleza__insignia medidor-fortaleza__insignia--${clasesInsignia[puntaje]}`}>
           {etiquetas[puntaje] || "Sin evaluar"}
