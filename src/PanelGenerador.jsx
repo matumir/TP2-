@@ -1,16 +1,5 @@
 import { useState } from "react"
 
-/**
- * PanelGenerador
- *
- * Versión compacta del generador pro, pensada para montarse
- * debajo del contenedor principal sin ocupar demasiado espacio.
- * No tiene tarjeta propia: hereda el contexto visual del padre.
- *
- * Props:
- *   alGenerar {function} — recibe la contraseña generada como string
- */
-
 const OPCIONES_LISTA = [
   { clave: "mayusculas", etiqueta: "Mayúsculas", descripcion: "A–Z", caracteres: "ABCDEFGHIJKLMNOPQRSTUVWXYZ" },
   { clave: "minusculas", etiqueta: "Minúsculas", descripcion: "a–z", caracteres: "abcdefghijklmnopqrstuvwxyz" },
